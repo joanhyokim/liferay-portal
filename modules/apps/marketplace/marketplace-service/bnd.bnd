@@ -2,14 +2,9 @@ Bundle-Name: Liferay Marketplace Service
 Bundle-SymbolicName: com.liferay.marketplace.service
 Bundle-Version: 1.0.0
 Export-Package: *
-Import-Package:\
-	com.liferay.portal.license.util,\
-	com.liferay.portlet.documentlibrary,\
-	com.liferay.portlet.documentlibrary,\
-	com.liferay.portlet.expando.model,\
-	com.liferay.portlet.expando.service,\
-	com.liferay.portlet.expando.util
-Include-Resource: classes
+Include-Resource:\
+	classes,\
+	@../../../../util-java/util-java.jar!/com/liferay/util/portlet/PortletProps.class
 Liferay-Service: true
 Require-Capability:\
 	liferay.extender;\
