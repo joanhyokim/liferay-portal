@@ -15,12 +15,12 @@
  * Liferay Social Office. If not, see http://www.gnu.org/licenses/agpl-3.0.html.
  */
 
-package com.liferay.contacts.util;
+package com.liferay.contacts.web.constants;
 
 /**
  * @author Ryan Park
  */
-public class PortletKeys extends com.liferay.portal.util.PortletKeys {
+public class ContactsPortletKeys {
 
 	public static final String CONTACTS_CENTER = "1_WAR_contactsportlet";
 
