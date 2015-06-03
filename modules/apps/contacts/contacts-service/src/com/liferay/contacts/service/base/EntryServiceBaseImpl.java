@@ -77,7 +77,7 @@ public abstract class EntryServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the entry remote service
 	 */
-	public com.liferay.contacts.service.EntryService getEntryService() {
+	public EntryService getEntryService() {
 		return entryService;
 	}
 
@@ -86,8 +86,7 @@ public abstract class EntryServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @param entryService the entry remote service
 	 */
-	public void setEntryService(
-		com.liferay.contacts.service.EntryService entryService) {
+	public void setEntryService(EntryService entryService) {
 		this.entryService = entryService;
 	}
 
@@ -279,9 +278,6 @@ public abstract class EntryServiceBaseImpl extends BaseServiceImpl
 	}
 
 	public void afterPropertiesSet() {
-		Class<?> clazz = getClass();
-
-		_classLoader = clazz.getClassLoader();
 	}
 
 	public void destroy() {
@@ -305,27 +301,6 @@ public abstract class EntryServiceBaseImpl extends BaseServiceImpl
 	@Override
 	public void setBeanIdentifier(String beanIdentifier) {
 		_beanIdentifier = beanIdentifier;
-	}
-
-	@Override
-	public Object invokeMethod(String name, String[] parameterTypes,
-		Object[] arguments) throws Throwable {
-		Thread currentThread = Thread.currentThread();
-
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		if (contextClassLoader != _classLoader) {
-			currentThread.setContextClassLoader(_classLoader);
-		}
-
-		try {
-			return _clpInvoker.invokeMethod(name, parameterTypes, arguments);
-		}
-		finally {
-			if (contextClassLoader != _classLoader) {
-				currentThread.setContextClassLoader(contextClassLoader);
-			}
-		}
 	}
 
 	protected Class<?> getModelClass() {
@@ -362,8 +337,8 @@ public abstract class EntryServiceBaseImpl extends BaseServiceImpl
 
 	@BeanReference(type = com.liferay.contacts.service.EntryLocalService.class)
 	protected com.liferay.contacts.service.EntryLocalService entryLocalService;
-	@BeanReference(type = com.liferay.contacts.service.EntryService.class)
-	protected com.liferay.contacts.service.EntryService entryService;
+	@BeanReference(type = EntryService.class)
+	protected EntryService entryService;
 	@BeanReference(type = EntryPersistence.class)
 	protected EntryPersistence entryPersistence;
 	@BeanReference(type = EntryFinder.class)
@@ -385,6 +360,4 @@ public abstract class EntryServiceBaseImpl extends BaseServiceImpl
 	@BeanReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
 	private String _beanIdentifier;
-	private ClassLoader _classLoader;
-	private EntryServiceClpInvoker _clpInvoker = new EntryServiceClpInvoker();
 }

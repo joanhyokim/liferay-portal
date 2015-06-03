@@ -14,6 +14,8 @@
 
 package com.liferay.contacts.service.base;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.contacts.model.Entry;
 import com.liferay.contacts.service.EntryLocalService;
 import com.liferay.contacts.service.persistence.EntryFinder;
@@ -37,7 +39,7 @@ import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.PersistedModel;
 import com.liferay.portal.service.BaseLocalServiceImpl;
-import com.liferay.portal.service.PersistedModelLocalServiceRegistryUtil;
+import com.liferay.portal.service.PersistedModelLocalServiceRegistry;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.util.PortalUtil;
@@ -60,6 +62,7 @@ import javax.sql.DataSource;
  * @see com.liferay.contacts.service.EntryLocalServiceUtil
  * @generated
  */
+@ProviderType
 public abstract class EntryLocalServiceBaseImpl extends BaseLocalServiceImpl
 	implements EntryLocalService, IdentifiableBean {
 	/*
@@ -176,10 +179,10 @@ public abstract class EntryLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
-	 * Returns the number of rows that match the dynamic query.
+	 * Returns the number of rows matching the dynamic query.
 	 *
 	 * @param dynamicQuery the dynamic query
-	 * @return the number of rows that match the dynamic query
+	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
 	public long dynamicQueryCount(DynamicQuery dynamicQuery) {
@@ -187,11 +190,11 @@ public abstract class EntryLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
-	 * Returns the number of rows that match the dynamic query.
+	 * Returns the number of rows matching the dynamic query.
 	 *
 	 * @param dynamicQuery the dynamic query
 	 * @param projection the projection to apply to the query
-	 * @return the number of rows that match the dynamic query
+	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
 	public long dynamicQueryCount(DynamicQuery dynamicQuery,
@@ -296,7 +299,7 @@ public abstract class EntryLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 *
 	 * @return the entry local service
 	 */
-	public com.liferay.contacts.service.EntryLocalService getEntryLocalService() {
+	public EntryLocalService getEntryLocalService() {
 		return entryLocalService;
 	}
 
@@ -305,8 +308,7 @@ public abstract class EntryLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 *
 	 * @param entryLocalService the entry local service
 	 */
-	public void setEntryLocalService(
-		com.liferay.contacts.service.EntryLocalService entryLocalService) {
+	public void setEntryLocalService(EntryLocalService entryLocalService) {
 		this.entryLocalService = entryLocalService;
 	}
 
@@ -517,16 +519,12 @@ public abstract class EntryLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	public void afterPropertiesSet() {
-		Class<?> clazz = getClass();
-
-		_classLoader = clazz.getClassLoader();
-
-		PersistedModelLocalServiceRegistryUtil.register("com.liferay.contacts.model.Entry",
+		persistedModelLocalServiceRegistry.register("com.liferay.contacts.model.Entry",
 			entryLocalService);
 	}
 
 	public void destroy() {
-		PersistedModelLocalServiceRegistryUtil.unregister(
+		persistedModelLocalServiceRegistry.unregister(
 			"com.liferay.contacts.model.Entry");
 	}
 
@@ -548,27 +546,6 @@ public abstract class EntryLocalServiceBaseImpl extends BaseLocalServiceImpl
 	@Override
 	public void setBeanIdentifier(String beanIdentifier) {
 		_beanIdentifier = beanIdentifier;
-	}
-
-	@Override
-	public Object invokeMethod(String name, String[] parameterTypes,
-		Object[] arguments) throws Throwable {
-		Thread currentThread = Thread.currentThread();
-
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		if (contextClassLoader != _classLoader) {
-			currentThread.setContextClassLoader(_classLoader);
-		}
-
-		try {
-			return _clpInvoker.invokeMethod(name, parameterTypes, arguments);
-		}
-		finally {
-			if (contextClassLoader != _classLoader) {
-				currentThread.setContextClassLoader(contextClassLoader);
-			}
-		}
 	}
 
 	protected Class<?> getModelClass() {
@@ -603,8 +580,8 @@ public abstract class EntryLocalServiceBaseImpl extends BaseLocalServiceImpl
 		}
 	}
 
-	@BeanReference(type = com.liferay.contacts.service.EntryLocalService.class)
-	protected com.liferay.contacts.service.EntryLocalService entryLocalService;
+	@BeanReference(type = EntryLocalService.class)
+	protected EntryLocalService entryLocalService;
 	@BeanReference(type = com.liferay.contacts.service.EntryService.class)
 	protected com.liferay.contacts.service.EntryService entryService;
 	@BeanReference(type = EntryPersistence.class)
@@ -627,7 +604,7 @@ public abstract class EntryLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected com.liferay.portal.service.UserService userService;
 	@BeanReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
+	@BeanReference(type = PersistedModelLocalServiceRegistry.class)
+	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
 	private String _beanIdentifier;
-	private ClassLoader _classLoader;
-	private EntryLocalServiceClpInvoker _clpInvoker = new EntryLocalServiceClpInvoker();
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:osgi="http://www.springframework.org/schema/osgi" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
+	<bean id="com.liferay.contacts.service.EntryLocalService" class="com.liferay.contacts.service.impl.EntryLocalServiceImpl" />
+	<osgi:service interface="com.liferay.contacts.service.EntryLocalService" ref="com.liferay.contacts.service.EntryLocalService">
+		<osgi:service-properties>
+			<entry key="json.web.service.context.name" value="contacts" />
+			<entry key="json.web.service.context.path" value="Entry" />
+		</osgi:service-properties>
+	</osgi:service>
+	<bean id="com.liferay.contacts.service.EntryService" class="com.liferay.contacts.service.impl.EntryServiceImpl" />
+	<osgi:service interface="com.liferay.contacts.service.EntryService" ref="com.liferay.contacts.service.EntryService">
+		<osgi:service-properties>
+			<entry key="json.web.service.context.name" value="contacts" />
+			<entry key="json.web.service.context.path" value="Entry" />
+		</osgi:service-properties>
+	</osgi:service>
+	<bean id="com.liferay.contacts.service.persistence.EntryPersistence" class="com.liferay.contacts.service.persistence.impl.EntryPersistenceImpl" parent="basePersistence" />
+	<osgi:service interface="com.liferay.contacts.service.persistence.EntryPersistence" ref="com.liferay.contacts.service.persistence.EntryPersistence" />
+	<bean id="com.liferay.contacts.service.persistence.EntryFinder" class="com.liferay.contacts.service.persistence.impl.EntryFinderImpl" parent="basePersistence" />
+	<osgi:service interface="com.liferay.contacts.service.persistence.EntryFinder" ref="com.liferay.contacts.service.persistence.EntryFinder" />
+</beans>
