@@ -15,7 +15,7 @@
  * Liferay Social Office. If not, see http://www.gnu.org/licenses/agpl-3.0.html.
  */
 
-package com.liferay.contacts.util;
+package com.liferay.contacts.web.util;
 
 /**
  * @author Ryan Park

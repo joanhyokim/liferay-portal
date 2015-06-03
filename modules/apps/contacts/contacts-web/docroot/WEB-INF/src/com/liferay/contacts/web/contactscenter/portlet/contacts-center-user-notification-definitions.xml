@@ -3,7 +3,7 @@
 
 <user-notification-definitions>
 	<definition>
-		<notification-type>${com.liferay.contacts.util.SocialRelationConstants.SOCIAL_RELATION_REQUEST}</notification-type>
+		<notification-type>${com.liferay.contacts.web.util.SocialRelationConstants.SOCIAL_RELATION_REQUEST}</notification-type>
 		<description>receive-a-notification-when-someone-sends-you-a-social-relationship-request</description>
 		<delivery-type>
 			<name>website</name>

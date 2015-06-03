@@ -15,7 +15,7 @@
  * Liferay Social Office. If not, see http://www.gnu.org/licenses/agpl-3.0.html.
  */
 
-package com.liferay.contacts.contactscenter.social;
+package com.liferay.contacts.web.contactscenter.social;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;

@@ -15,10 +15,10 @@
  * Liferay Social Office. If not, see http://www.gnu.org/licenses/agpl-3.0.html.
  */
 
-package com.liferay.contacts.messaging;
+package com.liferay.contacts.web.messaging;
 
 import com.liferay.contacts.service.ClpSerializer;
-import com.liferay.contacts.util.ContactsExtensionsUtil;
+import com.liferay.contacts.web.util.ContactsExtensionsUtil;
 import com.liferay.portal.kernel.messaging.HotDeployMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.util.ClassResolverUtil;

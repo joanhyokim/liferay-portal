@@ -15,16 +15,16 @@
  * Liferay Social Office. If not, see http://www.gnu.org/licenses/agpl-3.0.html.
  */
 
-package com.liferay.contacts.contactscenter.portlet;
+package com.liferay.contacts.web.contactscenter.portlet;
 
-import com.liferay.contacts.DuplicateEntryEmailAddressException;
-import com.liferay.contacts.EntryEmailAddressException;
+import com.liferay.contacts.exception.DuplicateEntryEmailAddressException;
+import com.liferay.contacts.exception.EntryEmailAddressException;
 import com.liferay.contacts.model.Entry;
 import com.liferay.contacts.service.EntryLocalServiceUtil;
 import com.liferay.contacts.util.ContactsConstants;
 import com.liferay.contacts.util.ContactsUtil;
-import com.liferay.contacts.util.PortletKeys;
 import com.liferay.contacts.util.SocialRelationConstants;
+import com.liferay.contacts.web.constants.ContactsPortletKeys;
 import com.liferay.portal.AddressCityException;
 import com.liferay.portal.AddressStreetException;
 import com.liferay.portal.AddressZipException;
@@ -738,7 +738,7 @@ public class ContactsCenterPortlet extends MVCPortlet {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		if (filterBy.equals(ContactsConstants.FILTER_BY_DEFAULT) &&
-			!portletId.equals(PortletKeys.MEMBERS)) {
+			!portletId.equals(ContactsPortletKeys.MEMBERS)) {
 
 			List<BaseModel<?>> contacts =
 				EntryLocalServiceUtil.searchUsersAndContacts(
@@ -770,7 +770,7 @@ public class ContactsCenterPortlet extends MVCPortlet {
 		}
 		else if (filterBy.equals(
 					ContactsConstants.FILTER_BY_FOLLOWERS) &&
-				 !portletId.equals(PortletKeys.MEMBERS)) {
+				 !portletId.equals(ContactsPortletKeys.MEMBERS)) {
 
 			List<SocialRelation> socialRelations =
 				SocialRelationLocalServiceUtil.getInverseRelations(
@@ -786,7 +786,7 @@ public class ContactsCenterPortlet extends MVCPortlet {
 		}
 		else if (filterBy.equals(
 					ContactsConstants.FILTER_BY_TYPE_MY_CONTACTS) &&
-				 !portletId.equals(PortletKeys.MEMBERS)) {
+				 !portletId.equals(ContactsPortletKeys.MEMBERS)) {
 
 			List<Entry> entries = EntryLocalServiceUtil.search(
 				themeDisplay.getUserId(), keywords, start, end);
@@ -828,7 +828,7 @@ public class ContactsCenterPortlet extends MVCPortlet {
 					});
 			}
 
-			if (portletId.equals(PortletKeys.MEMBERS)) {
+			if (portletId.equals(ContactsPortletKeys.MEMBERS)) {
 				params.put("usersGroups", group.getGroupId());
 			}
 			else if (filterBy.startsWith(ContactsConstants.FILTER_BY_GROUP)) {
@@ -1030,8 +1030,9 @@ public class ContactsCenterPortlet extends MVCPortlet {
 		throws Exception {
 
 		if (UserNotificationManagerUtil.isDeliver(
-				socialRequest.getReceiverUserId(), PortletKeys.CONTACTS_CENTER,
-				0, SocialRelationConstants.SOCIAL_RELATION_REQUEST,
+				socialRequest.getReceiverUserId(),
+				ContactsPortletKeys.CONTACTS_CENTER, 0,
+				SocialRelationConstants.SOCIAL_RELATION_REQUEST,
 				UserNotificationDeliveryConstants.TYPE_WEBSITE)) {
 
 			JSONObject notificationEventJSONObject =
@@ -1043,7 +1044,8 @@ public class ContactsCenterPortlet extends MVCPortlet {
 				"userId", socialRequest.getUserId());
 
 			UserNotificationEventLocalServiceUtil.sendUserNotificationEvents(
-				socialRequest.getReceiverUserId(), PortletKeys.CONTACTS_CENTER,
+				socialRequest.getReceiverUserId(),
+				ContactsPortletKeys.CONTACTS_CENTER,
 				UserNotificationDeliveryConstants.TYPE_WEBSITE, true,
 				notificationEventJSONObject);
 		}
