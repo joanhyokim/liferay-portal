@@ -15,9 +15,9 @@
  * Liferay Social Office. If not, see http://www.gnu.org/licenses/agpl-3.0.html.
  */
 
-package com.liferay.contacts.hook.upgrade;
+package com.liferay.contacts.upgrade;
 
-import com.liferay.contacts.hook.upgrade.v2_0_0.UpgradeEntry;
+import com.liferay.contacts.upgrade.v2_0_0.UpgradeEntry;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 
 /**
