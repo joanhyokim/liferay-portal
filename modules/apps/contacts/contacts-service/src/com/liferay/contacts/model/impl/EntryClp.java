@@ -39,9 +39,6 @@ import java.util.Map;
  * @author Brian Wing Shun Chan
  */
 public class EntryClp extends BaseModelImpl<Entry> implements Entry {
-	public EntryClp() {
-	}
-
 	@Override
 	public Object clone() {
 		EntryClp clone = new EntryClp();
