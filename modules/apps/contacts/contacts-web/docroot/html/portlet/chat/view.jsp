@@ -17,42 +17,21 @@
  */
 --%>
 
-<%@ include file="/init.jsp" %>
-
-<%
-User selUser = (User)request.getAttribute("user.selUser");
-%>
-
-<aui:model-context bean="<%= selUser %>" model="<%= User.class %>" />
-
-<liferay-ui:asset-categories-error />
-
-<liferay-ui:asset-tags-error />
-
-<h3><liferay-ui:message key="categorization" /></h3>
-
-<aui:fieldset>
-	<aui:input name="categories" type="assetCategories" />
-
-	<aui:input name="tags" type="assetTags"  />
-</aui:fieldset>
+<%@ include file="/html/portlet/init.jsp" %>
 
 <aui:script>
-	function <portlet:namespace />getSuggestionsContent() {
-
-		<%
-		StringBundler sb = new StringBundler();
-
-		if (selUser.getComments() != null) {
-			sb.append(selUser.getComments());
+	Liferay.on(
+		'chatPortletReady',
+		function() {
+			Liferay.Chat.Manager.registerBuddyService(
+				{
+					fn: function(user) {
+						window.location = user.getAttribute('data-displayURL');
+					},
+					icon: '<%= themeDisplay.getPathThemeImages() + "/common/pages.png" %>',
+					name: 'contacts-portlet'
+				}
+			);
 		}
-
-		if (selUser.getJobTitle() != null) {
-			sb.append(StringPool.SPACE);
-			sb.append(selUser.getJobTitle());
-		}
-		%>
-
-		return '<%= sb %>'
-	}
+	);
 </aui:script>

@@ -17,7 +17,7 @@
  */
 --%>
 
-<%@ include file="/init.jsp" %>
+<%@ include file="/html/portlet/init.jsp" %>
 
 <div class="contacts-portlet">
 	<liferay-portlet:actionURL portletConfiguration="<%= true %>" var="configurationActionURL" />

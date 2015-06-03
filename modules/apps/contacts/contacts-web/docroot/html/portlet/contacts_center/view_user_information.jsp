@@ -17,7 +17,7 @@
  */
 --%>
 
-<%@ include file="/init.jsp" %>
+<%@ include file="/html/portlet/init.jsp" %>
 
 <%
 User user2 = (User)request.getAttribute("view_user.jsp-user");
@@ -368,5 +368,5 @@ if (Validator.isNull(contact2.getSmsSn())) {
 </c:if>
 
 <c:if test="<%= incompleteProfile && showCompleteYourProfile && (themeDisplay.getUserId() == user2.getUserId()) %>">
-	<%@ include file="/contacts_center/complete_your_profile.jspf" %>
+	<%@ include file="/html/portlet/contacts_center/complete_your_profile.jspf" %>
 </c:if>

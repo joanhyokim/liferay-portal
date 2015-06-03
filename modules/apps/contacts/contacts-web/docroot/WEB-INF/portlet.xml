@@ -7,11 +7,11 @@
 		<portlet-class>com.liferay.contacts.contactscenter.portlet.ContactsCenterPortlet</portlet-class>
 		<init-param>
 			<name>config-template</name>
-			<value>/contacts_center/configuration.jsp</value>
+			<value>/html/portlet/contacts_center/configuration.jsp</value>
 		</init-param>
 		<init-param>
 			<name>view-template</name>
-			<value>/contacts_center/view.jsp</value>
+			<value>/html/portlet/contacts_center/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -42,11 +42,11 @@
 		<portlet-class>com.liferay.contacts.contactscenter.portlet.ContactsCenterPortlet</portlet-class>
 		<init-param>
 			<name>config-template</name>
-			<value>/contacts_center/configuration.jsp</value>
+			<value>/html/portlet/contacts_center/configuration.jsp</value>
 		</init-param>
 		<init-param>
 			<name>view-template</name>
-			<value>/profile/view.jsp</value>
+			<value>/html/portlet/profile/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -77,7 +77,7 @@
 		<portlet-class>com.liferay.contacts.contactscenter.portlet.ContactsCenterPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/my_contacts/view.jsp</value>
+			<value>/html/portlet/my_contacts/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -108,11 +108,11 @@
 		<portlet-class>com.liferay.contacts.contactscenter.portlet.ContactsCenterPortlet</portlet-class>
 		<init-param>
 			<name>config-template</name>
-			<value>/contacts_center/configuration.jsp</value>
+			<value>/html/portlet/contacts_center/configuration.jsp</value>
 		</init-param>
 		<init-param>
 			<name>view-template</name>
-			<value>/contacts_center/view.jsp</value>
+			<value>/html/portlet/contacts_center/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>

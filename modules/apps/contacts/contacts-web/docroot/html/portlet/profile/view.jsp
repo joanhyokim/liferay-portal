@@ -17,21 +17,28 @@
  */
 --%>
 
-<%@ include file="/init.jsp" %>
+<%@ include file="/html/portlet/init.jsp" %>
 
-<aui:script>
-	Liferay.on(
-		'chatPortletReady',
-		function() {
-			Liferay.Chat.Manager.registerBuddyService(
-				{
-					fn: function(user) {
-						window.location = user.getAttribute('data-displayURL');
-					},
-					icon: '<%= themeDisplay.getPathThemeImages() + "/common/pages.png" %>',
-					name: 'contacts-portlet'
-				}
-			);
-		}
-	);
-</aui:script>
+<%
+Group group = themeDisplay.getScopeGroup();
+%>
+
+<c:choose>
+	<c:when test="<%= group.isUser() %>">
+
+		<%
+		User user2 = UserLocalServiceUtil.getUserById(group.getClassPK());
+
+		request.setAttribute(WebKeys.CONTACTS_USER, user2);
+		%>
+
+		<aui:layout cssClass="contacts-container">
+			<liferay-util:include page="/contacts_center/view_user.jsp" servletContext="<%= application %>" />
+		</aui:layout>
+	</c:when>
+	<c:otherwise>
+		<div class="lfr-message-info">
+			<liferay-ui:message key="this-application-only-functions-when-placed-on-a-user-page" />
+		</div>
+	</c:otherwise>
+</c:choose>

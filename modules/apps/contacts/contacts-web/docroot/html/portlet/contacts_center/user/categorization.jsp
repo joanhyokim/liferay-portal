@@ -17,28 +17,42 @@
  */
 --%>
 
-<%@ include file="/init.jsp" %>
+<%@ include file="/html/portlet/init.jsp" %>
 
 <%
-Group group = themeDisplay.getScopeGroup();
+User selUser = (User)request.getAttribute("user.selUser");
 %>
 
-<c:choose>
-	<c:when test="<%= group.isUser() %>">
+<aui:model-context bean="<%= selUser %>" model="<%= User.class %>" />
+
+<liferay-ui:asset-categories-error />
+
+<liferay-ui:asset-tags-error />
+
+<h3><liferay-ui:message key="categorization" /></h3>
+
+<aui:fieldset>
+	<aui:input name="categories" type="assetCategories" />
+
+	<aui:input name="tags" type="assetTags"  />
+</aui:fieldset>
+
+<aui:script>
+	function <portlet:namespace />getSuggestionsContent() {
 
 		<%
-		User user2 = UserLocalServiceUtil.getUserById(group.getClassPK());
+		StringBundler sb = new StringBundler();
 
-		request.setAttribute(WebKeys.CONTACTS_USER, user2);
+		if (selUser.getComments() != null) {
+			sb.append(selUser.getComments());
+		}
+
+		if (selUser.getJobTitle() != null) {
+			sb.append(StringPool.SPACE);
+			sb.append(selUser.getJobTitle());
+		}
 		%>
 
-		<aui:layout cssClass="contacts-container">
-			<liferay-util:include page="/contacts_center/view_user.jsp" servletContext="<%= application %>" />
-		</aui:layout>
-	</c:when>
-	<c:otherwise>
-		<div class="lfr-message-info">
-			<liferay-ui:message key="this-application-only-functions-when-placed-on-a-user-page" />
-		</div>
-	</c:otherwise>
-</c:choose>
+		return '<%= sb %>'
+	}
+</aui:script>
